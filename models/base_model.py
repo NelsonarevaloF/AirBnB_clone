@@ -8,11 +8,24 @@ from uuid import uuid4
 
 class BaseModel:
     '''class BaseModel'''
-    def __init__(self):
+    def __init__(self, **Kwargs):
         '''construtor of class'''
-        self.id = str(uuid4())
-        self.created_at = datetime.today()
-        self.updated_at = datetime.today()
+        if Kwargs is not None and Kwargs:
+            for key, value in Kwargs.items():
+                if key in ('created_at', 'updated_at'):
+                    second = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    setattr(self, key, second)
+                elif key != '__class__':
+                    setattr(self, key, value)
+
+        if "id" not in Kwargs.keys():
+            self.id = str(uuid4())
+
+        if "created_at" not in Kwargs.keys():
+            self.created_at = datetime.today()
+
+        if "updated_at" not in Kwargs.keys():
+            self.updated_at = datetime.today()
 
     def __str__(self):
         '''overwrites the method __str__'''
