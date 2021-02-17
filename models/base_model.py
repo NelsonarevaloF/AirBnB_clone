@@ -6,11 +6,12 @@ BaseModel: defines all common attributes/methods for other classes
 
 from datetime import datetime
 from uuid import uuid4
+from models import storage
 
 
 class BaseModel:
     '''class BaseModel'''
-    def __init__(self, *args, **Kwargs):
+    def __init__(self, **Kwargs):
         '''construtor of class'''
         if Kwargs is not None and Kwargs:
             for key, value in Kwargs.items():
@@ -29,6 +30,9 @@ class BaseModel:
         if "updated_at" not in Kwargs.keys():
             self.updated_at = datetime.today()
 
+        if Kwargs is None or len(Kwargs) == 0:
+            storage.new(self)
+
     def __str__(self):
         '''overwrites the method __str__'''
         str_name = "[{:s}] ({}) {}"
@@ -37,6 +41,7 @@ class BaseModel:
     def save(self):
         '''update the updated_a attribute'''
         self.updated_at = datetime.today()
+        storage.save()
 
     def to_dict(self):
         '''return the dict of class'''
