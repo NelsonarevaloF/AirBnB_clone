@@ -3,13 +3,14 @@
 '''
 BaseModel: defines all common attributes/methods for other classes
 '''
+
 from datetime import datetime
 from uuid import uuid4
 
 
 class BaseModel:
     '''class BaseModel'''
-    def __init__(self, **Kwargs):
+    def __init__(self, *args, **Kwargs):
         '''construtor of class'''
         if Kwargs is not None and Kwargs:
             for key, value in Kwargs.items():
