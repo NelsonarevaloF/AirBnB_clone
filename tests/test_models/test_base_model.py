@@ -11,3 +11,6 @@ from time import sleep
 
 class TestBaseModel(unittest.TestCase):
     """Test Base Model"""
+
+if __name__ == '__main__':
+    unittest.main()
