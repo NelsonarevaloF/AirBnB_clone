@@ -61,30 +61,57 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         'Deletes an instance based on it s ID and save the changes'
-        cmd_argv = arg.split()
-        if not cmd_argv:
+        list_arg = arg.split()
+        if not list_arg:
             print("** class name missing **")
             return None
         try:
-            eval(cmd_argv[0])
+            eval(list_arg[0])
         except:
             print("** class doesn't exist **")
             return None
 
         all_objs = storage.all()
 
-        if len(cmd_argv) < 2:
+        if len(list_arg) < 2:
                 print("** instance id missing **")
                 return None
 
-        cmd_argv[1] = cmd_argv[1].replace("\"", "")
-        key = cmd_argv[0] + '.' + cmd_argv[1]
+        key = list_arg[0] + '.' + list_arg[1]
 
         if all_objs.get(key, False):
             all_objs.pop(key)
             storage.save()
         else:
             print("** no instance found **")
+
+    def do_all(self, arg):
+        list_arg = arg.split()
+        if len(list_arg) > 0:
+            try:
+                eval(list_arg[0])
+            except:
+                print("** class doesn't exist **")
+                return None
+
+        str_obj = '['
+        all_objs = storage.all()
+        size_objs = len(all_objs)
+        cont = 0
+        for value in all_objs.values():
+            if not list_arg:
+                str_obj += '"' + str(value) + '"'
+                cont += 1
+                if cont < size_objs:
+                    str_obj += ", "
+            elif value.__class__.__name__ == list_arg[0]:
+                str_obj += '"' + str(value) + '"'
+                cont += 1
+                if cont < size_objs:
+                    str_obj += ", "
+        else:
+            str_obj += ']'
+            print(str_obj)
 
     def emptyline(self):
         '''it will be execute when press enter no arguments'''
