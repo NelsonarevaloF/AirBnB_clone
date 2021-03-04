@@ -21,17 +21,26 @@
 	right: 30px;
 }
 
-.filters button:hover{
-	opacity: 0.9;
-}
-
 .locations, .amenities {
 	height: 100%;
 	width: 25%;
+	position: relative;
 }
 
 .locations {
+	border: 0;
 	border-right: 1px solid #DDDDDD;
+}
+
+.popover{
+	list-style-type: none;
+	border: 1px solid #DDDDDD;
+	border-radius: 4px;
+	margin-top: 16px;
+	background: #FAFAFA;
+	padding-bottom: 30px;
+	padding-top: 20px;
+	display: none;
 }
 
 .locations h3, .amenities h3{
@@ -45,39 +54,33 @@
 	margin: 1px 40px;
 }
 
-.popover {
-    display: none;
-    background-color: #FAFAFA;
-    border: 1px solid #DDDDDD;
-    border-radius: 4px;
-    position: absolute;
-    box-sizing: border-box;
-    width: 100%;
-    top: 100%;
-    margin-top: 0;
+.popover ul{
+	list-style-type: none;
+	padding-left: 20px; 
 }
 
-div:hover > .popover {
-    display: block;
-    cursor: pointer;
-    
-  }
-.popover h2 {
-    font-size: 16px;
-}
-.popover li {
-    margin: 10px 0px 5px 0px; 
-    list-style: none;
+.popover li{
+	margin-bottom: 7px;	 
 }
 
-.filters .locations ul {
-    padding: 0.5em 0 1em 1em;
-  }
-  
-.filters .locations li {
-    margin: 0 0 0 5%;
-    padding: 0.2em;
+.popover h2{
+	margin: 0; 
+	margin-bottom: 5px;
 }
-.filters .amenities ul {
-    padding: 2em 0 2em 3em;
-  }
+
+/*--------------------EFECTOS HOVER---------------------*/
+
+
+.filters button:hover{
+	opacity: 0.9;
+}
+
+.locations:hover>.popover{
+	display: block; 
+}
+
+.amenities:hover>.popover{
+	display: block; 
+}
+
+/*------------------------------------------------------*/
